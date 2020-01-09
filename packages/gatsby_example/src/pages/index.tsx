@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react';
 
-const Index: FunctionComponent = () => <div>Hello World</div>
+const Index: FunctionComponent = () => <div>Hello World</div>;
 
-export default Index
+export default Index;

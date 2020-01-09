@@ -1,11 +1,23 @@
 {
-  "name": "mini_gatsby-theme-core",
-  "version": "0.1.0",
+  "name": "@minimizelab/mini_gatsby-theme-core",
+  "version": "1.0.0",
   "main": "gatsby-config.js",
-  "repository": "git@github.com:minimizelab/mini_packages.git",
   "author": "mini_dev <hello@minimize.se>",
   "license": "MIT",
   "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/minimizelab/mini_packages.git",
+    "directory": "packages/mini_gatsby-theme-core"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "develop": "gatsby develop"
+  },
   "dependencies": {},
   "peerDependencies": {
     "gatsby": "^2.15.2",

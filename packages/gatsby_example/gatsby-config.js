@@ -1,3 +1,3 @@
 module.exports = {
-  plugins: ['mini_gatsby-theme-core'],
-}
+  plugins: ['@minimizelab/mini_gatsby-theme-core'],
+};
