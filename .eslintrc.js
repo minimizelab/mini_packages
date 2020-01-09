@@ -17,23 +17,14 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    jest: true,
   },
   plugins: ['@typescript-eslint'],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  rules: {
-    '@typescript-eslint/explicit-function-return-type': [
-      'error',
-      {
-        allowTypedFunctionExpressions: true,
-      },
-    ],
-  },
+  rules: {},
   overrides: [
     // Override some TypeScript rules just for .js files
     {
@@ -43,4 +34,4 @@ module.exports = {
       },
     },
   ],
-}
+};

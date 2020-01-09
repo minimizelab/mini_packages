@@ -1,0 +1,27 @@
+{
+  "name": "@minimizelab/mini_utils",
+  "version": "1.0.1",
+  "main": "dist/main.cjs.js",
+  "module": "dist/main.esm.js",
+  "browser": "dist/main.umd.js",
+  "typings": "dist/main.d.ts",
+  "author": "mini_dev <hello@minimize.se>",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/minimizelab/mini_packages.git",
+    "directory": "packages/mini_utils"
+  },
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest"
+  },
+  "files": [
+    "dist"
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "mini_packages",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "monorepo for mini_dev packages",
   "main": "index.js",
   "repository": "git@github.com:minimizelab/mini_packages.git",
@@ -12,9 +12,12 @@
   ],
   "scripts": {
     "lint": "lerna run lint",
-    "test": "lerna run test"
+    "test": "lerna run test --stream"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.3",
     "@types/react": "^16.9.2",
@@ -22,6 +25,7 @@
     "@types/react-helmet": "^5.0.10",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -30,6 +34,9 @@
     "lerna": "^3.16.4",
     "prettier": "^1.18.2",
     "rollup": "^1.21.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
     "typescript": "^3.6.2"
   }
 }
