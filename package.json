@@ -14,7 +14,8 @@
   "scripts": {
     "lint": "lerna run lint",
     "test": "lerna run test --stream",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "release": "lerna publish from-package --contents pkg"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
