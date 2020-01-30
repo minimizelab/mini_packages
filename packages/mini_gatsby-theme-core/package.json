@@ -1,6 +1,6 @@
 {
   "name": "@minimizelab/mini_gatsby-theme-core",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "main": "gatsby-config.js",
   "author": "mini_dev <hello@minimize.se>",
   "license": "MIT",
@@ -18,7 +18,6 @@
     "clean": "gatsby clean",
     "develop": "gatsby develop"
   },
-  "dependencies": {},
   "peerDependencies": {
     "gatsby": "^2.15.2",
     "react": "^16.9.0",
