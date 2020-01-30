@@ -14,5 +14,6 @@
   "dependencies": {
     "@minimizelab/mini_gatsby-theme-core": "^1.1.1",
     "@minimizelab/mini_utils": "^1.1.1"
-  }
+  },
+  "gitHead": "c673a785a5a29b8a25bb466d16122078dd0bac1d"
 }

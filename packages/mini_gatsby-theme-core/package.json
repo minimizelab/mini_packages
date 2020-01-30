@@ -27,5 +27,6 @@
     "gatsby": "^2.15.19",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
-  }
+  },
+  "gitHead": "c673a785a5a29b8a25bb466d16122078dd0bac1d"
 }

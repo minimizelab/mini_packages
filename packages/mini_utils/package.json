@@ -17,7 +17,8 @@
   "scripts": {
     "build": "pika build",
     "test": "jest",
-    "publish": "pika publish"
+    "publish": "node ./node_modules/.bin/pack publish",
+    "version": "yarn build"
   },
   "@pika/pack": {
     "pipeline": [
@@ -31,5 +32,6 @@
         "@pika/plugin-build-web"
       ]
     ]
-  }
+  },
+  "gitHead": "c673a785a5a29b8a25bb466d16122078dd0bac1d"
 }
