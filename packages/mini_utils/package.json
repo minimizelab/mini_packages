@@ -16,7 +16,8 @@
   },
   "scripts": {
     "build": "pika build",
-    "test": "jest"
+    "test": "jest",
+    "publish": "pika publish"
   },
   "@pika/pack": {
     "pipeline": [
@@ -25,6 +26,9 @@
       ],
       [
         "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
       ]
     ]
   }
