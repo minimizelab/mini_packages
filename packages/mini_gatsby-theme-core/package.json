@@ -17,7 +17,8 @@
     "build": "pika build",
     "build:gatsby": "gatsby build",
     "clean": "gatsby clean",
-    "develop": "gatsby develop"
+    "develop": "gatsby develop",
+    "version": "yarn build"
   },
   "@pika/pack": {
     "pipeline": [

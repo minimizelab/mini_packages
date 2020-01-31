@@ -12,7 +12,8 @@
     "directory": "packages/mini_packages"
   },
   "scripts": {
-    "build": "pika build"
+    "build": "pika build",
+    "version": "yarn build"
   },
   "@pika/pack": {
     "pipeline": [
