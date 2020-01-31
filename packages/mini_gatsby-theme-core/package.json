@@ -1,6 +1,6 @@
 {
   "name": "@minimizelab/mini_gatsby-theme-core",
-  "version": "1.1.2-alpha.0",
+  "version": "1.1.2",
   "main": "gatsby-config.js",
   "author": "mini_dev <hello@minimize.se>",
   "license": "MIT",

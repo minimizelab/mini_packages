@@ -1,6 +1,6 @@
 {
   "name": "@minimizelab/mini_packages",
-  "version": "1.1.2-alpha.0",
+  "version": "1.1.2",
   "license": "MIT",
   "private": false,
   "publishConfig": {
@@ -27,8 +27,8 @@
     ]
   },
   "dependencies": {
-    "@minimizelab/mini_gatsby-theme-core": "^1.1.2-alpha.0",
-    "@minimizelab/mini_utils": "^1.1.2-alpha.0"
+    "@minimizelab/mini_gatsby-theme-core": "^1.1.2",
+    "@minimizelab/mini_utils": "^1.1.2"
   },
   "gitHead": "908ecb163056d45b945a4424c3c80cd548897042"
 }
