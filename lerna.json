@@ -1,7 +1,14 @@
 {
-  "lerna": "^3.16.4",
-  "packages": ["packages/*"],
-  "version": "independent",
+  "packages": [
+    "packages/*",
+    "examples/*"
+  ],
+  "version": "1.1.3",
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "publish": {
+    "ignoreChanges": [
+      "examples/**"
+    ]
+  }
 }

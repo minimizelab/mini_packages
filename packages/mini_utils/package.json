@@ -1,10 +1,8 @@
 {
   "name": "@minimizelab/mini_utils",
-  "version": "1.0.2",
-  "main": "dist/main.cjs.js",
-  "module": "dist/main.esm.js",
-  "browser": "dist/main.umd.js",
-  "typings": "dist/main.d.ts",
+  "version": "1.1.3",
+  "main": "pkg/dist-node/index.js",
+  "homepage": "https://github.com/minimizelab/mini_packages/tree/master/packages/mini_utils",
   "author": "mini_dev <hello@minimize.se>",
   "license": "MIT",
   "private": false,
@@ -17,11 +15,22 @@
     "directory": "packages/mini_utils"
   },
   "scripts": {
-    "build": "tsc && rollup -c",
-    "dev": "rollup -c -w",
-    "test": "jest"
+    "build": "pika build",
+    "test": "jest",
+    "version": "yarn build"
   },
-  "files": [
-    "dist"
-  ]
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
+  },
+  "gitHead": "a4b65f4995a287ecee2be7e524722aeb7507a275"
 }

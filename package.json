@@ -8,16 +8,25 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
     "lint": "lerna run lint",
-    "test": "lerna run test --stream"
+    "test": "lerna run test --stream",
+    "build": "lerna run build",
+    "release": "lerna publish from-package --contents pkg"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-typescript": "^7.7.7",
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.8.1",
+    "@pika/plugin-build-types": "^0.8.1",
+    "@pika/plugin-build-web": "^0.8.1",
+    "@pika/plugin-copy-assets": "^0.8.1",
+    "@pika/plugin-ts-standard-pkg": "^0.8.1",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.3",
     "@types/react": "^16.9.2",
@@ -33,10 +42,7 @@
     "jest": "^24.9.0",
     "lerna": "^3.16.4",
     "prettier": "^1.18.2",
-    "rollup": "^1.21.4",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript": "^1.0.1",
     "typescript": "^3.6.2"
-  }
+  },
+  "dependencies": {}
 }

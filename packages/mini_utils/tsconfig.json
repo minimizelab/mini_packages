@@ -1,20 +1,5 @@
 {
-  "compilerOptions": {
-    /* Options */
-    "target": "es5",
-    "module": "esnext",
-    "lib": ["esnext"],
-    "declaration": true,
-    "declarationDir": "dist",
-    "emitDeclarationOnly": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "rootDirs": ["src/"],
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
-  },
-  "include": ["src/main.ts"],
+  "extends": "../../tsconfig.json",
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

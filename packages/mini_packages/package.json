@@ -1,6 +1,6 @@
 {
   "name": "@minimizelab/mini_packages",
-  "version": "1.0.2",
+  "version": "1.1.3",
   "license": "MIT",
   "private": false,
   "publishConfig": {
@@ -11,8 +11,25 @@
     "url": "git://github.com/minimizelab/mini_packages.git",
     "directory": "packages/mini_packages"
   },
+  "scripts": {
+    "build": "pika build",
+    "version": "yarn build"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-copy-assets",
+        {
+          "files": [
+            "package.json"
+          ]
+        }
+      ]
+    ]
+  },
   "dependencies": {
-    "@minimizelab/mini_gatsby-theme-core": "^1.0.0",
-    "@minimizelab/mini_utils": "^1.0.0"
-  }
+    "@minimizelab/mini_gatsby-theme-core": "^1.1.3",
+    "@minimizelab/mini_utils": "^1.1.3"
+  },
+  "gitHead": "908ecb163056d45b945a4424c3c80cd548897042"
 }
