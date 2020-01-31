@@ -11,9 +11,24 @@
     "url": "git://github.com/minimizelab/mini_packages.git",
     "directory": "packages/mini_packages"
   },
+  "scripts": {
+    "build": "pika build"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-copy-assets",
+        {
+          "files": [
+            "package.json"
+          ]
+        }
+      ]
+    ]
+  },
   "dependencies": {
     "@minimizelab/mini_gatsby-theme-core": "^1.1.2-alpha.0",
     "@minimizelab/mini_utils": "^1.1.2-alpha.0"
   },
-  "gitHead": "a4b65f4995a287ecee2be7e524722aeb7507a275"
+  "gitHead": "908ecb163056d45b945a4424c3c80cd548897042"
 }

@@ -2013,6 +2013,14 @@
     "@types/node" "^10.12.18"
     rollup "^1.1.0"
 
+"@pika/plugin-copy-assets@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@pika/plugin-copy-assets/-/plugin-copy-assets-0.8.1.tgz#a096977f6edcdf239983721476a40bf24bcd2157"
+  integrity sha512-z+yLc3gRurz+fj2D0cfkDjSe2BIXcjR0zKCeCEGshnX4tiRQ/4z4yOKGNf6UfPE2lgY6nthf9R423fq8WIzU8A==
+  dependencies:
+    "@pika/types" "^0.8.1"
+    copy-concurrently "^1.0.5"
+
 "@pika/plugin-ts-standard-pkg@^0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@pika/plugin-ts-standard-pkg/-/plugin-ts-standard-pkg-0.8.1.tgz#a7bfc303a89e1c31512afe5fdaf1707a14303173"
@@ -4324,7 +4332,7 @@ cookie@0.4.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
 
-copy-concurrently@^1.0.0:
+copy-concurrently@^1.0.0, copy-concurrently@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
   integrity sha512-f2domd9fsVDFtaFcbaRZuYXwtdmnzqbADSwhSWYxYB/Q8zsdUUFMXVRwXGDMWmbEzAn1kdRrtI1T/KTFOL4X2A==

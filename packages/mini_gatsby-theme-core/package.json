@@ -14,9 +14,22 @@
     "directory": "packages/mini_gatsby-theme-core"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "pika build",
+    "build:gatsby": "gatsby build",
     "clean": "gatsby clean",
     "develop": "gatsby develop"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-copy-assets",
+        {
+          "files": [
+            "gatsby-config.js"
+          ]
+        }
+      ]
+    ]
   },
   "peerDependencies": {
     "gatsby": "^2.15.2",
