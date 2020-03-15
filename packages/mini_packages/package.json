@@ -4,7 +4,8 @@
   "license": "MIT",
   "private": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "directory": "pkg"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     ]
   },
   "dependencies": {
+    "@minimizelab/mini_ui-react": "^1",
     "@minimizelab/mini_gatsby-theme-core": "^1.1.4",
     "@minimizelab/mini_utils": "^1.1.4"
   },

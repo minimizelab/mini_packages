@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@minimizelab/mini_gatsby-theme-core": "^1.1.4",
+    "@minimizelab/mini_ui-react": "^1",
     "@minimizelab/mini_utils": "^1.1.4",
     "gatsby": "^2.19.24",
     "react": "^16.13.0",

@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/",
+    "directory": "pkg"
   },
   "repository": {
     "type": "git",
@@ -42,5 +43,8 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
-  "gitHead": "a4b65f4995a287ecee2be7e524722aeb7507a275"
+  "gitHead": "a4b65f4995a287ecee2be7e524722aeb7507a275",
+  "dependencies": {
+    "gatsby-plugin-typescript": "^2.2.3"
+  }
 }
