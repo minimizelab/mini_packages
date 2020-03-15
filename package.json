@@ -15,6 +15,7 @@
     "lint": "lerna run lint",
     "test": "lerna run test --stream",
     "build": "lerna run build",
+    "bootstrap": "lerna bootstrap --force-local",
     "release": "lerna publish from-package --contents pkg"
   },
   "devDependencies": {
