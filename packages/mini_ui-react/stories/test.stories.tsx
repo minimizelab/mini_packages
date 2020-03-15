@@ -7,4 +7,4 @@ export default {
   title: 'Test',
 };
 
-export const test: FC = () => <Test />;
+export const JustATest: FC = () => <Test />;

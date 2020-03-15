@@ -1,3 +1,2 @@
-import Test from './test';
-
-export { Test };
+export { default as Test } from './test';
+export { default as Image } from './Image/index';
