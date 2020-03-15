@@ -1,6 +1,6 @@
 {
   "name": "@minimizelab/mini_ui-react",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "pkg/dist-node/index.js",
   "types": "pkg/dist-types/index.d.ts",
   "homepage": "https://github.com/minimizelab/mini_packages/tree/master/packages/mini_ui-react",
