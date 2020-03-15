@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "packages/mini_ui-react/package.json",
+      "use": "@now/static-build"
+    },
+    {
+      "src": "examples/gatsby_example/package.json",
+      "use": "@now/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/mini-gatsby-theme/(.*)",
+      "dest": "/examples/gatsby-example/$1"
+    },
+    {
+      "src": "^/mini-ui-react/(.*)",
+      "dest": "/packages/mini-ui-react/index.html"
+    }
+  ],
+  "build": {
+    "env": {
+      "NPM_RC": "@npmrc"
+    }
+  }
+}
