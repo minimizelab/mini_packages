@@ -3,7 +3,8 @@
   "builds": [
     {
       "src": "packages/mini_ui-react/package.json",
-      "use": "@now/static-build"
+      "use": "@now/static-build",
+      "config": { "distDir": "dist" }
     },
     {
       "src": "examples/gatsby_example/package.json",
@@ -13,11 +14,11 @@
   "routes": [
     {
       "src": "^/mini-gatsby-theme/(.*)",
-      "dest": "/examples/gatsby-example/$1"
+      "dest": "/examples/gatsby_example/$1"
     },
     {
       "src": "^/mini-ui-react/(.*)",
-      "dest": "/packages/mini-ui-react/index.html"
+      "dest": "/packages/mini_ui-react/index.html"
     }
   ],
   "build": {
