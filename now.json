@@ -18,7 +18,7 @@
     },
     {
       "src": "^/mini-ui-react/(.*)",
-      "dest": "/packages/mini_ui-react/(.*)"
+      "dest": "/packages/mini_ui-react/$1"
     }
   ],
   "build": {
