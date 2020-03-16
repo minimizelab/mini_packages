@@ -4,8 +4,7 @@
   "license": "MIT",
   "private": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-    "directory": "pkg"
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
