@@ -1,31 +1,10 @@
-import React, { useMemo } from 'react';
-import { urlBuilder } from '@minimizelab/mini_utils';
+import React from 'react';
 import useImgLazyLoad from './useImgLazyLoad';
-import defaults from './defaults';
-import Source from './Source';
-const getAspectRatio = (details, size) => {
-    const original = details.image.width / details.image.height;
-    const calcSize = {
-        width: size && size.width !== undefined ? size.width : details.image.width,
-        height: size && size.height !== undefined ? size.height : details.image.height,
-    };
-    if (size && size.height !== undefined && size.width !== undefined) {
-        return { aspectRatio: size.width / size.height, calcSize };
-    }
-    return { aspectRatio: original, calcSize };
-};
-const Image = ({ baseUrl, details, size, quality, fit, style, imgStyle, className, imgClassName, alt, ...props }) => {
-    const { aspectRatio, calcSize } = useMemo(() => getAspectRatio(details, size), [details, size]);
-    const lowResUrl = useMemo(() => urlBuilder.getContentfulUrl({
-        baseUrl,
-        size: { width: 30 },
-        format: 'jpg',
-        quality: 50,
-    }), [baseUrl]);
-    const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResUrl);
+const Image = ({ size, srcSets, style, imgStyle, aspectRatio, className, imgClassName, lowResSrc, ...props }) => {
+    const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResSrc);
     return (React.createElement("div", { style: {
-            width: calcSize.width,
-            height: calcSize.width / aspectRatio,
+            width: size.width,
+            height: size.width / aspectRatio,
             maxHeight: '100%',
             maxWidth: '100%',
             lineHeight: 0,
@@ -33,10 +12,11 @@ const Image = ({ baseUrl, details, size, quality, fit, style, imgStyle, classNam
             transition: 'filter 200ms ease',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
-            backgroundImage: !loaded ? `url(${lowResUrl})` : undefined,
+            backgroundImage: lowResSrc ? `url(${lowResSrc})` : undefined,
             ...style,
         }, className: className }, preloaded && (React.createElement("picture", { style: { lineHeight: 0 } },
-        defaults.formats.map(format => (React.createElement(Source, { key: format.type, baseUrl: baseUrl, size: size, fit: fit, quality: quality, format: format }))),
+        srcSets &&
+            srcSets.map(srcSet => React.createElement("source", Object.assign({ key: srcSet.type }, srcSet))),
         React.createElement("img", Object.assign({ className: imgClassName, style: {
                 width: '100%',
                 height: '100%',
@@ -46,12 +26,9 @@ const Image = ({ baseUrl, details, size, quality, fit, style, imgStyle, classNam
                 objectPosition: 'center',
                 boxSizing: 'border-box',
                 ...imgStyle,
-            }, src: urlBuilder.getContentfulUrl({
-                baseUrl,
-                size,
-                fit,
-                format: 'original',
-                quality,
-            }), loading: "lazy", onLoad: onLoaded, alt: alt }, props))))));
+            }, loading: "lazy", onLoad: onLoaded }, props))))));
 };
 export default Image;
+export { useImgLazyLoad };
+export { default as useContentfulImage } from './useContentfulImage';
+export { default as useSanityImage } from './useSanityImage';

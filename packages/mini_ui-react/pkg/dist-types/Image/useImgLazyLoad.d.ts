@@ -1,4 +1,4 @@
-declare type UseImgLazyLoad = (url: string) => {
+declare type UseImgLazyLoad = (url?: string) => {
     loaded: boolean;
     preloaded: boolean;
     onLoaded: () => void;

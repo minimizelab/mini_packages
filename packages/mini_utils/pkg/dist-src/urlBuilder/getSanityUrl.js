@@ -1,5 +1,5 @@
 import { addSize, addFit, addQuality, addFormat, addQueryString, } from './shared';
-const getContentfulUrl = ({ baseUrl, size, fit, format, quality, resolution, }) => {
+const getSanityUrl = ({ baseUrl, size, fit, format, quality, resolution, }) => {
     let queryString = '';
     if (size)
         queryString = addSize(queryString, size, resolution);
@@ -10,4 +10,4 @@ const getContentfulUrl = ({ baseUrl, size, fit, format, quality, resolution, }) 
     queryString = addFormat(queryString, format);
     return addQueryString(baseUrl, queryString);
 };
-export default getContentfulUrl;
+export default getSanityUrl;

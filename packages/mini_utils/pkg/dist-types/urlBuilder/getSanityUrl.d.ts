@@ -8,5 +8,5 @@ export interface GetSanityUrlProps {
     resolution?: number;
 }
 export declare type GetSanityUrl = (config: GetSanityUrlProps) => string;
-declare const getContentfulUrl: GetSanityUrl;
-export default getContentfulUrl;
+declare const getSanityUrl: GetSanityUrl;
+export default getSanityUrl;

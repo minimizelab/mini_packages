@@ -56,7 +56,7 @@ const getContentfulUrl = ({ baseUrl, size, fit, format, quality, resolution, }) 
     return addQueryString(baseUrl, queryString);
 };
 
-const getContentfulUrl$1 = ({ baseUrl, size, fit, format, quality, resolution, }) => {
+const getSanityUrl = ({ baseUrl, size, fit, format, quality, resolution, }) => {
     let queryString = '';
     if (size)
         queryString = addSize(queryString, size, resolution);
@@ -70,7 +70,7 @@ const getContentfulUrl$1 = ({ baseUrl, size, fit, format, quality, resolution, }
 
 var index = {
     getContentfulUrl,
-    getSanityUrl: getContentfulUrl$1,
+    getSanityUrl,
 };
 
 export { combineClasses, index as urlBuilder };

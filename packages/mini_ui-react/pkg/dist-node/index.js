@@ -6,9 +6,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var mini_utils = require('@minimizelab/mini_utils');
-
-const Test = () => React__default.createElement("div", null, "Hello!");
+require('@minimizelab/mini_utils');
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -96,118 +94,50 @@ function _objectWithoutProperties(source, excluded) {
 }
 
 const useImgLazyLoad = url => {
-  const [loaded, setLoaded] = React.useState(false);
-  const [preloaded, setPreloaded] = React.useState(false);
+  const lazyLoad = url !== undefined;
+  const [loaded, setLoaded] = React.useState(!lazyLoad);
+  const [preloaded, setPreloaded] = React.useState(!lazyLoad);
   const onLoaded = React.useCallback(() => {
     setLoaded(true);
   }, [setLoaded]);
   React.useEffect(() => {
+    if (!lazyLoad) return;
     const lowImg = new Image();
     lowImg.src = url;
 
     lowImg.onload = () => {
       setPreloaded(true);
     };
-  }, [url, setPreloaded]);
+  }, [url, setPreloaded, lazyLoad]);
   return {
     loaded,
     preloaded,
     onLoaded
-  };
-};
-
-const formats = [{
-  type: 'image/webp',
-  name: 'webp'
-}, {
-  type: 'image/png',
-  name: 'png'
-}, {
-  type: 'image/jpeg',
-  name: 'jpg'
-}];
-const defaults = {
-  formats
-};
-
-const Source = (_ref) => {
-  let {
-    format
-  } = _ref,
-      rest = _objectWithoutProperties(_ref, ["format"]);
-
-  return React__default.createElement("source", {
-    srcSet: `${mini_utils.urlBuilder.getContentfulUrl(_objectSpread2({
-      format: format.name
-    }, rest))}, 
-    ${mini_utils.urlBuilder.getContentfulUrl(_objectSpread2({
-      format: format.name,
-      resolution: 1.5
-    }, rest))} 1.5x, 
-    ${mini_utils.urlBuilder.getContentfulUrl(_objectSpread2({
-      format: format.name,
-      resolution: 2
-    }, rest))} 2x`,
-    type: format.type
-  });
-};
-
-const getAspectRatio = (details, size) => {
-  const original = details.image.width / details.image.height;
-  const calcSize = {
-    width: size && size.width !== undefined ? size.width : details.image.width,
-    height: size && size.height !== undefined ? size.height : details.image.height
-  };
-
-  if (size && size.height !== undefined && size.width !== undefined) {
-    return {
-      aspectRatio: size.width / size.height,
-      calcSize
-    };
-  }
-
-  return {
-    aspectRatio: original,
-    calcSize
   };
 };
 
 const Image$1 = (_ref) => {
   let {
-    baseUrl,
-    details,
     size,
-    quality,
-    fit,
+    srcSets,
     style,
     imgStyle,
+    aspectRatio,
     className,
     imgClassName,
-    alt
+    lowResSrc
   } = _ref,
-      props = _objectWithoutProperties(_ref, ["baseUrl", "details", "size", "quality", "fit", "style", "imgStyle", "className", "imgClassName", "alt"]);
+      props = _objectWithoutProperties(_ref, ["size", "srcSets", "style", "imgStyle", "aspectRatio", "className", "imgClassName", "lowResSrc"]);
 
-  const {
-    aspectRatio,
-    calcSize
-  } = React.useMemo(() => getAspectRatio(details, size), [details, size]);
-  const lowResUrl = React.useMemo(() => mini_utils.urlBuilder.getContentfulUrl({
-    baseUrl,
-    size: {
-      width: 30
-    },
-    format: 'jpg',
-    quality: 50
-  }), [baseUrl]);
   const {
     loaded,
     preloaded,
     onLoaded
-  } = useImgLazyLoad(lowResUrl);
+  } = useImgLazyLoad(lowResSrc);
   return React__default.createElement("div", {
     style: _objectSpread2({
-      width: calcSize.width,
-      height: calcSize.width / aspectRatio,
+      width: size.width,
+      height: size.width / aspectRatio,
       maxHeight: '100%',
       maxWidth: '100%',
       lineHeight: 0,
@@ -215,21 +145,16 @@ const Image$1 = (_ref) => {
       transition: 'filter 200ms ease',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundImage: !loaded ? `url(${lowResUrl})` : undefined
+      backgroundImage: lowResSrc ? `url(${lowResSrc})` : undefined
     }, style),
     className: className
   }, preloaded && React__default.createElement("picture", {
     style: {
       lineHeight: 0
     }
-  }, defaults.formats.map(format => React__default.createElement(Source, {
-    key: format.type,
-    baseUrl: baseUrl,
-    size: size,
-    fit: fit,
-    quality: quality,
-    format: format
-  })), React__default.createElement("img", Object.assign({
+  }, srcSets && srcSets.map(srcSet => React__default.createElement("source", Object.assign({
+    key: srcSet.type
+  }, srcSet))), React__default.createElement("img", Object.assign({
     className: imgClassName,
     style: _objectSpread2({
       width: '100%',
@@ -240,19 +165,11 @@ const Image$1 = (_ref) => {
       objectPosition: 'center',
       boxSizing: 'border-box'
     }, imgStyle),
-    src: mini_utils.urlBuilder.getContentfulUrl({
-      baseUrl,
-      size,
-      fit,
-      format: 'original',
-      quality
-    }),
     loading: "lazy",
-    onLoad: onLoaded,
-    alt: alt
+    onLoad: onLoaded
   }, props))));
 };
 
 exports.Image = Image$1;
-exports.Test = Test;
+exports.useImgLazyLoad = useImgLazyLoad;
 //# sourceMappingURL=index.js.map

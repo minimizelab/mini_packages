@@ -59,7 +59,7 @@ const getContentfulUrl = ({
   return addQueryString(baseUrl, queryString);
 };
 
-const getContentfulUrl$1 = ({
+const getSanityUrl = ({
   baseUrl,
   size,
   fit,
@@ -77,7 +77,7 @@ const getContentfulUrl$1 = ({
 
 var index = {
   getContentfulUrl,
-  getSanityUrl: getContentfulUrl$1
+  getSanityUrl
 };
 
 exports.combineClasses = combineClasses;

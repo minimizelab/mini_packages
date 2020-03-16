@@ -1,7 +1,12 @@
 import { FC, HTMLAttributes, CSSProperties } from 'react';
-import { ImageProps, ImageDetails } from './types';
-interface Props extends ImageProps, HTMLAttributes<HTMLImageElement> {
-    details: ImageDetails;
+import { ImageSize, SrcSet } from './types';
+import useImgLazyLoad from './useImgLazyLoad';
+interface Props extends HTMLAttributes<HTMLImageElement> {
+    size: ImageSize;
+    lowResSrc?: string;
+    srcSets?: SrcSet[];
+    src: string;
+    aspectRatio: number;
     style?: CSSProperties;
     imgStyle?: CSSProperties;
     alt?: string;
@@ -10,4 +15,6 @@ interface Props extends ImageProps, HTMLAttributes<HTMLImageElement> {
 }
 declare const Image: FC<Props>;
 export default Image;
-export { ImageDetails } from './types';
+export { useImgLazyLoad };
+export { default as useContentfulImage } from './useContentfulImage';
+export { default as useSanityImage } from './useSanityImage';
