@@ -1,0 +1,35 @@
+{
+  "name": "@minimizelab/mini_gatsby-theme-core",
+  "version": "1.2.0",
+  "license": "MIT",
+  "files": [
+    "dist-*/",
+    "bin/",
+    "gatsby-config.js"
+  ],
+  "pika": true,
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/minimizelab/mini_packages.git",
+    "directory": "packages/mini_gatsby-theme-core"
+  },
+  "dependencies": {
+    "gatsby-plugin-typescript": "^2.2.3"
+  },
+  "peerDependencies": {
+    "gatsby": "^2.15.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "gatsby": "^2.15.19",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "directory": "pkg"
+  }
+}

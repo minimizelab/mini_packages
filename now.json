@@ -21,6 +21,7 @@
       "dest": "/packages/mini_ui-react/$1"
     }
   ],
+  "trailingSlash": false,
   "build": {
     "env": {
       "NPM_RC": "@npmrc"

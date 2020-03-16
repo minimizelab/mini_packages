@@ -1,0 +1,27 @@
+{
+  "name": "@minimizelab/mini_utils",
+  "version": "1.2.0",
+  "license": "MIT",
+  "files": [
+    "dist-*/",
+    "bin/"
+  ],
+  "pika": true,
+  "sideEffects": false,
+  "homepage": "https://github.com/minimizelab/mini_packages/tree/master/packages/mini_utils",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/minimizelab/mini_packages",
+    "directory": "packages/mini_utils"
+  },
+  "dependencies": {},
+  "private": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "directory": "pkg"
+  },
+  "source": "dist-src/index.js",
+  "types": "dist-types/index.d.ts",
+  "main": "dist-node/index.js",
+  "module": "dist-web/index.js"
+}
