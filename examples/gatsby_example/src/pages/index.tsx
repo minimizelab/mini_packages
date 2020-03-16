@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Test } from '@minimizelab/mini_ui-react';
 
-const Index: FunctionComponent = () => <Test />;
+const Index: FunctionComponent = () => <div>Hello</div>;
 
 export default Index;
