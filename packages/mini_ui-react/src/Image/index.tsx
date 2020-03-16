@@ -1,12 +1,13 @@
-import React, { useMemo, FC, HTMLAttributes, CSSProperties } from 'react';
-import { urlBuilder } from '@minimizelab/mini_utils';
-import { ImageProps, ImageSize, ImageDetails } from './types';
+import React, { FC, HTMLAttributes, CSSProperties } from 'react';
+import { ImageSize, SrcSet } from './types';
 import useImgLazyLoad from './useImgLazyLoad';
-import defaults from './defaults';
-import Source from './Source';
 
-interface Props extends ImageProps, HTMLAttributes<HTMLImageElement> {
-  details: ImageDetails;
+interface Props extends HTMLAttributes<HTMLImageElement> {
+  size: ImageSize;
+  lowResSrc?: string;
+  srcSets?: SrcSet[];
+  src: string;
+  aspectRatio: number;
   style?: CSSProperties;
   imgStyle?: CSSProperties;
   alt?: string;
@@ -14,55 +15,23 @@ interface Props extends ImageProps, HTMLAttributes<HTMLImageElement> {
   imgClassName?: string;
 }
 
-const getAspectRatio = (
-  details: ImageDetails,
-  size?: ImageSize
-): { aspectRatio: number; calcSize: { width: number; height: number } } => {
-  const original = details.image.width / details.image.height;
-  const calcSize = {
-    width: size && size.width !== undefined ? size.width : details.image.width,
-    height:
-      size && size.height !== undefined ? size.height : details.image.height,
-  };
-  if (size && size.height !== undefined && size.width !== undefined) {
-    return { aspectRatio: size.width / size.height, calcSize };
-  }
-  return { aspectRatio: original, calcSize };
-};
-
 const Image: FC<Props> = ({
-  baseUrl,
-  details,
   size,
-  quality,
-  fit,
+  srcSets,
   style,
   imgStyle,
+  aspectRatio,
   className,
   imgClassName,
-  alt,
+  lowResSrc,
   ...props
 }) => {
-  const { aspectRatio, calcSize } = useMemo(
-    () => getAspectRatio(details, size),
-    [details, size]
-  );
-  const lowResUrl = useMemo(
-    () =>
-      urlBuilder.getContentfulUrl({
-        baseUrl,
-        size: { width: 30 },
-        format: 'jpg',
-        quality: 50,
-      }),
-    [baseUrl]
-  );
-  const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResUrl);
+  const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResSrc);
   return (
     <div
       style={{
-        width: calcSize.width,
-        height: calcSize.width / aspectRatio,
+        width: size.width,
+        height: size.width / aspectRatio,
         maxHeight: '100%',
         maxWidth: '100%',
         lineHeight: 0,
@@ -70,23 +39,15 @@ const Image: FC<Props> = ({
         transition: 'filter 200ms ease',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        backgroundImage: !loaded ? `url(${lowResUrl})` : undefined,
+        backgroundImage: lowResSrc ? `url(${lowResSrc})` : undefined,
         ...style,
       }}
       className={className}
     >
       {preloaded && (
         <picture style={{ lineHeight: 0 }}>
-          {defaults.formats.map(format => (
-            <Source
-              key={format.type}
-              baseUrl={baseUrl}
-              size={size}
-              fit={fit}
-              quality={quality}
-              format={format}
-            />
-          ))}
+          {srcSets &&
+            srcSets.map(srcSet => <source key={srcSet.type} {...srcSet} />)}
           <img
             className={imgClassName}
             style={{
@@ -99,16 +60,8 @@ const Image: FC<Props> = ({
               boxSizing: 'border-box',
               ...imgStyle,
             }}
-            src={urlBuilder.getContentfulUrl({
-              baseUrl,
-              size,
-              fit,
-              format: 'original',
-              quality,
-            })}
             loading="lazy"
             onLoad={onLoaded}
-            alt={alt}
             {...props}
           />
         </picture>
@@ -118,5 +71,6 @@ const Image: FC<Props> = ({
 };
 
 export default Image;
-
-export { ImageDetails } from './types';
+export { useImgLazyLoad };
+export { default as useContentfulImage } from './useContentfulImage';
+export { default as useSanityImage } from './useSanityImage';

@@ -3,8 +3,9 @@ export interface ImageSize {
   height?: number;
 }
 
-export interface ImageDetails {
-  image: ImageSize;
+export interface SrcSet {
+  srcSet: string;
+  type: string;
 }
 
 export interface Format {
@@ -15,10 +16,3 @@ export interface Format {
 export type Fit = 'crop' | 'scale' | 'pad' | 'fill';
 
 export type FormatName = 'jpg' | 'png' | 'webp' | 'original';
-
-export interface ImageProps {
-  baseUrl: string;
-  size?: ImageSize;
-  fit?: Fit;
-  quality?: number;
-}

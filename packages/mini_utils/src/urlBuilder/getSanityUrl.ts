@@ -18,7 +18,7 @@ export interface GetSanityUrlProps {
 
 export type GetSanityUrl = (config: GetSanityUrlProps) => string;
 
-const getContentfulUrl: GetSanityUrl = ({
+const getSanityUrl: GetSanityUrl = ({
   baseUrl,
   size,
   fit,
@@ -35,4 +35,4 @@ const getContentfulUrl: GetSanityUrl = ({
   return addQueryString(baseUrl, queryString);
 };
 
-export default getContentfulUrl;
+export default getSanityUrl;
