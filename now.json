@@ -13,15 +13,14 @@
   ],
   "routes": [
     {
-      "src": "/mini-gatsby-theme/(.*)",
+      "src": "^/mini-gatsby-theme/(.*)",
       "dest": "/examples/gatsby_example/$1"
     },
     {
-      "src": "/mini-ui-react/(.*)",
+      "src": "^/mini-ui-react/(.*)",
       "dest": "/packages/mini_ui-react/$1"
     }
   ],
-  "trailingSlash": false,
   "build": {
     "env": {
       "NPM_RC": "@npmrc"
