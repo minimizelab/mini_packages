@@ -12,6 +12,7 @@
     "examples/*"
   ],
   "scripts": {
+    "start": "now dev",
     "lint": "lerna run lint",
     "test": "lerna run test --stream",
     "build": "lerna run build",
