@@ -15,6 +15,6 @@ interface Props extends HTMLAttributes<HTMLImageElement> {
 }
 declare const Image: FC<Props>;
 export default Image;
-export { useImgLazyLoad };
+export { useImgLazyLoad, Image };
 export { default as useContentfulImage } from './useContentfulImage';
 export { default as useSanityImage } from './useSanityImage';

@@ -1,1 +1,1 @@
-export { default as Image, useImgLazyLoad } from './Image/index';
+export * from './Image/index';

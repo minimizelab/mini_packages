@@ -6,7 +6,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-require('@minimizelab/mini_utils');
+var mini_utils = require('@minimizelab/mini_utils');
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -116,6 +116,118 @@ const useImgLazyLoad = url => {
   };
 };
 
+const formats = [{
+  type: 'image/webp',
+  name: 'webp'
+}, {
+  type: 'image/png',
+  name: 'png'
+}, {
+  type: 'image/jpeg',
+  name: 'jpg'
+}];
+const defaults = {
+  formats
+};
+
+const useContentfulImage = ({
+  baseUrl,
+  size,
+  formats = defaults.formats
+}) => {
+  const src = React.useMemo(() => mini_utils.urlBuilder.getContentfulUrl({
+    baseUrl,
+    format: 'original'
+  }), [baseUrl, size]);
+  const lowResSrc = React.useMemo(() => mini_utils.urlBuilder.getContentfulUrl({
+    baseUrl,
+    size: {
+      width: 30
+    },
+    format: 'jpg',
+    quality: 50
+  }), [baseUrl]);
+  const srcSets = React.useMemo(() => formats.map(({
+    type,
+    name
+  }) => ({
+    srcSet: `${mini_utils.urlBuilder.getContentfulUrl({
+      size,
+      baseUrl,
+      format: name
+    })}, 
+    ${mini_utils.urlBuilder.getContentfulUrl({
+      size,
+      baseUrl,
+      format: name,
+      resolution: 1.5
+    })} 1.5x, 
+    ${mini_utils.urlBuilder.getContentfulUrl({
+      size,
+      baseUrl,
+      format: name,
+      resolution: 2
+    })} 2x`,
+    type
+  })), [formats, baseUrl]);
+  return {
+    src,
+    srcSets,
+    lowResSrc,
+    size
+  };
+};
+
+const useSanityImage = ({
+  baseUrl,
+  size,
+  blurUp,
+  quality,
+  formats = defaults.formats
+}) => {
+  const urlConfig = React.useMemo(() => ({
+    baseUrl,
+    size,
+    quality
+  }), [size, baseUrl, quality]);
+  const src = React.useMemo(() => mini_utils.urlBuilder.getSanityUrl({
+    baseUrl,
+    format: 'original',
+    size
+  }), [baseUrl, size]);
+  const lowResSrc = React.useMemo(() => blurUp ? mini_utils.urlBuilder.getSanityUrl({
+    baseUrl,
+    size: {
+      width: 30
+    },
+    format: 'original',
+    quality: 50
+  }) : undefined, [baseUrl]);
+  const srcSets = React.useMemo(() => formats.map(({
+    type,
+    name
+  }) => ({
+    srcSet: `${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
+      format: name
+    }))}, 
+    ${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
+      format: name,
+      resolution: 1.5
+    }))} 1.5x, 
+    ${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
+      format: name,
+      resolution: 2
+    }))} 2x`,
+    type
+  })), [formats, baseUrl]);
+  return {
+    src,
+    srcSets,
+    lowResSrc,
+    size
+  };
+};
+
 const Image$1 = (_ref) => {
   let {
     size,
@@ -171,5 +283,7 @@ const Image$1 = (_ref) => {
 };
 
 exports.Image = Image$1;
+exports.useContentfulImage = useContentfulImage;
 exports.useImgLazyLoad = useImgLazyLoad;
+exports.useSanityImage = useSanityImage;
 //# sourceMappingURL=index.js.map

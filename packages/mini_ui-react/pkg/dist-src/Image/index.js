@@ -29,6 +29,6 @@ const Image = ({ size, srcSets, style, imgStyle, aspectRatio, className, imgClas
             }, loading: "lazy", onLoad: onLoaded }, props))))));
 };
 export default Image;
-export { useImgLazyLoad };
+export { useImgLazyLoad, Image };
 export { default as useContentfulImage } from './useContentfulImage';
 export { default as useSanityImage } from './useSanityImage';
