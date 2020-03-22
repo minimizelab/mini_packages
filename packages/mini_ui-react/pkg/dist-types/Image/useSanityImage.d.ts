@@ -2,11 +2,13 @@ import { ImageSize, Format, SrcSet } from './types';
 interface UseSanityImageProps {
     baseUrl: string;
     size: ImageSize;
+    blurUp?: boolean;
+    quality?: number;
     formats?: Format[];
 }
 declare type UseSanityImage = (config: UseSanityImageProps) => {
     src: string;
-    lowResSrc: string;
+    lowResSrc?: string;
     srcSets: SrcSet[];
     size: ImageSize;
 };

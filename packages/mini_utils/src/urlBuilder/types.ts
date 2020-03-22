@@ -3,6 +3,8 @@ export interface ImageSize {
   height?: number;
 }
 
-export type Fit = 'crop' | 'scale' | 'pad' | 'fill';
+type Fit = 'crop' | 'scale' | 'fill';
+export type SanityFit = 'min' | 'max' | 'clip' | 'fillmax' | Fit;
+export type ContentfulFit = 'pad' | Fit;
 
 export type Format = 'jpg' | 'png' | 'webp' | 'original';

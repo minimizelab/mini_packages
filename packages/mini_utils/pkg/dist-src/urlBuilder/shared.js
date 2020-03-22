@@ -6,11 +6,11 @@ export const addSize = (url, size, resolution = 1) => {
         sizeString += `&h=${size.height * resolution}`;
     return url + sizeString;
 };
-export const addQueryString = (url, queryString) => queryString.length > 0
-    ? `https:${url}?${queryString[0] === '&'
+export const addQueryString = (url, queryString, preString) => queryString.length > 0
+    ? `${preString ? preString : ''}${url}?${queryString[0] === '&'
         ? queryString.slice(1, queryString.length)
         : queryString}`
-    : `https:${url}`;
+    : `${preString ? preString : ''}${url}`;
 export const addFit = (url, fit) => `${url}&fit=${fit}`;
 export const addQuality = (url, quality) => `${url}&q=${quality}`;
 export const addFormat = (url, format) => {

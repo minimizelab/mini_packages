@@ -5,12 +5,12 @@ import {
   addFormat,
   addQueryString,
 } from './shared';
-import { ImageSize, Fit, Format } from './types';
+import { ImageSize, Format, ContentfulFit } from './types';
 
 export interface GetContentfulUrlProps {
   baseUrl: string;
   size?: ImageSize;
-  fit?: Fit;
+  fit?: ContentfulFit;
   format: Format;
   quality?: number;
   resolution?: number;
@@ -32,7 +32,7 @@ const getContentfulUrl: GetContentfulUrl = ({
   if (quality !== undefined) queryString = addQuality(queryString, quality);
   queryString = addFormat(queryString, format);
 
-  return addQueryString(baseUrl, queryString);
+  return addQueryString(baseUrl, queryString, 'https:');
 };
 
 export default getContentfulUrl;

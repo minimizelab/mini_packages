@@ -30,8 +30,8 @@ const Image: FC<Props> = ({
   return (
     <div
       style={{
-        width: size.width,
-        height: size.width / aspectRatio,
+        width: size.height * aspectRatio,
+        height: size.height,
         maxHeight: '100%',
         maxWidth: '100%',
         lineHeight: 0,
@@ -39,7 +39,8 @@ const Image: FC<Props> = ({
         transition: 'filter 200ms ease',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        backgroundImage: lowResSrc ? `url(${lowResSrc})` : undefined,
+        backgroundImage:
+          lowResSrc !== undefined ? `url(${lowResSrc})` : undefined,
         ...style,
       }}
       className={className}

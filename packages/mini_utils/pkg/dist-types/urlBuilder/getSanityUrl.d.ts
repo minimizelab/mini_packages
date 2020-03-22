@@ -1,8 +1,8 @@
-import { Format, Fit, ImageSize } from './types';
+import { Format, ImageSize, SanityFit } from './types';
 export interface GetSanityUrlProps {
     baseUrl: string;
     size?: ImageSize;
-    fit?: Fit;
+    fit?: SanityFit;
     format: Format;
     quality?: number;
     resolution?: number;

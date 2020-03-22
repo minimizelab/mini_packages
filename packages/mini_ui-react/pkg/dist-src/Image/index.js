@@ -3,8 +3,8 @@ import useImgLazyLoad from './useImgLazyLoad';
 const Image = ({ size, srcSets, style, imgStyle, aspectRatio, className, imgClassName, lowResSrc, ...props }) => {
     const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResSrc);
     return (React.createElement("div", { style: {
-            width: size.width,
-            height: size.width / aspectRatio,
+            width: size.height * aspectRatio,
+            height: size.height,
             maxHeight: '100%',
             maxWidth: '100%',
             lineHeight: 0,
@@ -12,7 +12,7 @@ const Image = ({ size, srcSets, style, imgStyle, aspectRatio, className, imgClas
             transition: 'filter 200ms ease',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
-            backgroundImage: lowResSrc ? `url(${lowResSrc})` : undefined,
+            backgroundImage: lowResSrc !== undefined ? `url(${lowResSrc})` : undefined,
             ...style,
         }, className: className }, preloaded && (React.createElement("picture", { style: { lineHeight: 0 } },
         srcSets &&

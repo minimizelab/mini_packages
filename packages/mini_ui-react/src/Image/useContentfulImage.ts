@@ -23,7 +23,6 @@ const useContentfulImage: UseContentfulImage = ({
       urlBuilder.getContentfulUrl({
         baseUrl,
         format: 'original',
-        size,
       }),
     [baseUrl, size]
   );
@@ -41,15 +40,18 @@ const useContentfulImage: UseContentfulImage = ({
     () =>
       formats.map(({ type, name }) => ({
         srcSet: `${urlBuilder.getContentfulUrl({
+          size,
           baseUrl,
           format: name,
         })}, 
     ${urlBuilder.getContentfulUrl({
+      size,
       baseUrl,
       format: name,
       resolution: 1.5,
     })} 1.5x, 
     ${urlBuilder.getContentfulUrl({
+      size,
       baseUrl,
       format: name,
       resolution: 2,

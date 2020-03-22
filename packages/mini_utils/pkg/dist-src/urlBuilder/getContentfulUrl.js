@@ -8,6 +8,6 @@ const getContentfulUrl = ({ baseUrl, size, fit, format, quality, resolution, }) 
     if (quality !== undefined)
         queryString = addQuality(queryString, quality);
     queryString = addFormat(queryString, format);
-    return addQueryString(baseUrl, queryString);
+    return addQueryString(baseUrl, queryString, 'https:');
 };
 export default getContentfulUrl;

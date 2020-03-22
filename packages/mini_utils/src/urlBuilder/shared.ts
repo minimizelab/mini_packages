@@ -11,14 +11,18 @@ export const addSize = (
   return url + sizeString;
 };
 
-export const addQueryString = (url: string, queryString: string): string =>
+export const addQueryString = (
+  url: string,
+  queryString: string,
+  preString?: string
+): string =>
   queryString.length > 0
-    ? `https:${url}?${
+    ? `${preString ? preString : ''}${url}?${
         queryString[0] === '&'
           ? queryString.slice(1, queryString.length)
           : queryString
       }`
-    : `https:${url}`;
+    : `${preString ? preString : ''}${url}`;
 
 export const addFit = (url: string, fit: string): string => `${url}&fit=${fit}`;
 

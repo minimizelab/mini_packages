@@ -1,8 +1,8 @@
-import { ImageSize, Fit, Format } from './types';
+import { ImageSize, Format, ContentfulFit } from './types';
 export interface GetContentfulUrlProps {
     baseUrl: string;
     size?: ImageSize;
-    fit?: Fit;
+    fit?: ContentfulFit;
     format: Format;
     quality?: number;
     resolution?: number;

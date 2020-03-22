@@ -1,3 +1,4 @@
+export * from './types';
 declare const _default: {
     getContentfulUrl: import("./getContentfulUrl").GetContentfulUrl;
     getSanityUrl: import("./getSanityUrl").GetSanityUrl;

@@ -136,8 +136,8 @@ const Image$1 = (_ref) => {
   } = useImgLazyLoad(lowResSrc);
   return React__default.createElement("div", {
     style: _objectSpread2({
-      width: size.width,
-      height: size.width / aspectRatio,
+      width: size.height * aspectRatio,
+      height: size.height,
       maxHeight: '100%',
       maxWidth: '100%',
       lineHeight: 0,
@@ -145,7 +145,7 @@ const Image$1 = (_ref) => {
       transition: 'filter 200ms ease',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundImage: lowResSrc ? `url(${lowResSrc})` : undefined
+      backgroundImage: lowResSrc !== undefined ? `url(${lowResSrc})` : undefined
     }, style),
     className: className
   }, preloaded && React__default.createElement("picture", {

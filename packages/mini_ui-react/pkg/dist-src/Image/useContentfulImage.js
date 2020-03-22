@@ -5,7 +5,6 @@ const useContentfulImage = ({ baseUrl, size, formats = defaults.formats, }) => {
     const src = useMemo(() => urlBuilder.getContentfulUrl({
         baseUrl,
         format: 'original',
-        size,
     }), [baseUrl, size]);
     const lowResSrc = useMemo(() => urlBuilder.getContentfulUrl({
         baseUrl,
@@ -15,15 +14,18 @@ const useContentfulImage = ({ baseUrl, size, formats = defaults.formats, }) => {
     }), [baseUrl]);
     const srcSets = useMemo(() => formats.map(({ type, name }) => ({
         srcSet: `${urlBuilder.getContentfulUrl({
+            size,
             baseUrl,
             format: name,
         })}, 
     ${urlBuilder.getContentfulUrl({
+            size,
             baseUrl,
             format: name,
             resolution: 1.5,
         })} 1.5x, 
     ${urlBuilder.getContentfulUrl({
+            size,
             baseUrl,
             format: name,
             resolution: 2,

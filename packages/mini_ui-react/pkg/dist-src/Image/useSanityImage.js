@@ -1,30 +1,37 @@
 import { useMemo } from 'react';
 import { urlBuilder } from '@minimizelab/mini_utils';
 import defaults from './defaults';
-const useSanityImage = ({ baseUrl, size, formats = defaults.formats, }) => {
+const useSanityImage = ({ baseUrl, size, blurUp, quality, formats = defaults.formats, }) => {
+    const urlConfig = useMemo(() => ({
+        baseUrl,
+        size,
+        quality,
+    }), [size, baseUrl, quality]);
     const src = useMemo(() => urlBuilder.getSanityUrl({
         baseUrl,
         format: 'original',
         size,
     }), [baseUrl, size]);
-    const lowResSrc = useMemo(() => urlBuilder.getSanityUrl({
-        baseUrl,
-        size: { width: 30 },
-        format: 'jpg',
-        quality: 50,
-    }), [baseUrl]);
+    const lowResSrc = useMemo(() => blurUp
+        ? urlBuilder.getSanityUrl({
+            baseUrl,
+            size: { width: 30 },
+            format: 'original',
+            quality: 50,
+        })
+        : undefined, [baseUrl]);
     const srcSets = useMemo(() => formats.map(({ type, name }) => ({
         srcSet: `${urlBuilder.getSanityUrl({
-            baseUrl,
+            ...urlConfig,
             format: name,
         })}, 
     ${urlBuilder.getSanityUrl({
-            baseUrl,
+            ...urlConfig,
             format: name,
             resolution: 1.5,
         })} 1.5x, 
     ${urlBuilder.getSanityUrl({
-            baseUrl,
+            ...urlConfig,
             format: name,
             resolution: 2,
         })} 2x`,

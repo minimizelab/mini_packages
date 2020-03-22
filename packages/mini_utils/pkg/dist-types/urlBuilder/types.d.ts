@@ -2,5 +2,8 @@ export interface ImageSize {
     width?: number;
     height?: number;
 }
-export declare type Fit = 'crop' | 'scale' | 'pad' | 'fill';
+declare type Fit = 'crop' | 'scale' | 'fill';
+export declare type SanityFit = 'min' | 'max' | 'clip' | 'fillmax' | Fit;
+export declare type ContentfulFit = 'pad' | Fit;
 export declare type Format = 'jpg' | 'png' | 'webp' | 'original';
+export {};
