@@ -1,6 +1,6 @@
 {
   "name": "@minimizelab/mini_gatsby-theme-core",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "license": "MIT",
   "files": [
     "dist-*/",
