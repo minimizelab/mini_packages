@@ -53,6 +53,7 @@
     "ts-loader": "^6.2.1"
   },
   "dependencies": {
-    "@minimizelab/mini_utils": "^1.2.4"
+    "@minimizelab/mini_utils": "^1.2.4",
+    "object-fit-images": "^3.2.4"
   }
 }

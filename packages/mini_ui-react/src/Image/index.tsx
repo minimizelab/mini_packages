@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, CSSProperties } from 'react';
 import { ImageSize, SrcSet } from './types';
 import useImgLazyLoad from './useImgLazyLoad';
+import useIEObjectFitPolyfill from './useIEObjectFitPolyfill';
 
 interface Props extends HTMLAttributes<HTMLImageElement> {
   size: ImageSize;
@@ -27,6 +28,12 @@ const Image: FC<Props> = ({
   ...props
 }) => {
   const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResSrc);
+  const { imgRef, polyfillStyle } = useIEObjectFitPolyfill({
+    objectFit: imgStyle.objectFit ? imgStyle.objectFit : 'cover',
+    objectPosition: imgStyle.objectPosition
+      ? imgStyle.objectPosition
+      : 'center',
+  });
   return (
     <div
       style={{
@@ -50,6 +57,7 @@ const Image: FC<Props> = ({
           {srcSets &&
             srcSets.map(srcSet => <source key={srcSet.type} {...srcSet} />)}
           <img
+            ref={imgRef}
             className={imgClassName}
             style={{
               width: '100%',
@@ -60,6 +68,7 @@ const Image: FC<Props> = ({
               objectPosition: 'center',
               boxSizing: 'border-box',
               ...imgStyle,
+              ...polyfillStyle,
             }}
             loading="lazy"
             onLoad={onLoaded}
@@ -75,3 +84,4 @@ export default Image;
 export { useImgLazyLoad, Image };
 export { default as useContentfulImage } from './useContentfulImage';
 export { default as useSanityImage } from './useSanityImage';
+export { default as useIEObjectFitPolyfill } from './useIEObjectFitPolyfill';
