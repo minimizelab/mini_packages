@@ -11,7 +11,7 @@ const useIEObjectFitPolyfill: UseIEObjectFitPolyfill = ({
   objectFit,
   objectPosition,
 }) => {
-  const imgRef = useRef<HTMLImageElement>();
+  const imgRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
     const testImg = document.createElement('img');
     if (

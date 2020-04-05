@@ -94,14 +94,14 @@ function _objectWithoutProperties(source, excluded) {
 }
 
 const useImgLazyLoad = url => {
-  const lazyLoad = url !== undefined;
+  const lazyLoad = typeof url !== 'undefined';
   const [loaded, setLoaded] = React.useState(!lazyLoad);
   const [preloaded, setPreloaded] = React.useState(!lazyLoad);
   const onLoaded = React.useCallback(() => {
     setLoaded(true);
   }, [setLoaded]);
   React.useEffect(() => {
-    if (!lazyLoad) return;
+    if (typeof url === 'undefined') return;
     const lowImg = new Image();
     lowImg.src = url;
 
@@ -113,6 +113,30 @@ const useImgLazyLoad = url => {
     loaded,
     preloaded,
     onLoaded
+  };
+};
+
+const useIEObjectFitPolyfill = ({
+  objectFit,
+  objectPosition
+}) => {
+  const imgRef = React.useRef(null);
+  React.useEffect(() => {
+    const testImg = document.createElement('img');
+
+    if (typeof testImg.style.objectFit === 'undefined' || typeof testImg.style.objectPosition === 'undefined') {
+      Promise.resolve().then(() => require('object-fit-images')).then(({
+        default: ObjectFitImages
+      }) => ObjectFitImages(imgRef.current));
+    }
+  }, [imgRef]);
+  return {
+    imgRef,
+    polyfillStyle: {
+      objectFit,
+      objectPosition,
+      fontFamily: `"object-fit: ${objectFit}; object-position: ${objectPosition}"`
+    }
   };
 };
 
@@ -246,9 +270,16 @@ const Image$1 = (_ref) => {
     preloaded,
     onLoaded
   } = useImgLazyLoad(lowResSrc);
+  const {
+    imgRef,
+    polyfillStyle
+  } = useIEObjectFitPolyfill({
+    objectFit: (imgStyle === null || imgStyle === void 0 ? void 0 : imgStyle.objectFit) ? imgStyle.objectFit : 'cover',
+    objectPosition: (imgStyle === null || imgStyle === void 0 ? void 0 : imgStyle.objectPosition) ? imgStyle.objectPosition : 'center'
+  });
   return React__default.createElement("div", {
     style: _objectSpread2({
-      width: size.height * aspectRatio,
+      width: size.height ? size.height * aspectRatio : undefined,
       height: size.height,
       maxHeight: '100%',
       maxWidth: '100%',
@@ -267,6 +298,7 @@ const Image$1 = (_ref) => {
   }, srcSets && srcSets.map(srcSet => React__default.createElement("source", Object.assign({
     key: srcSet.type
   }, srcSet))), React__default.createElement("img", Object.assign({
+    ref: imgRef,
     className: imgClassName,
     style: _objectSpread2({
       width: '100%',
@@ -276,7 +308,7 @@ const Image$1 = (_ref) => {
       objectFit: 'cover',
       objectPosition: 'center',
       boxSizing: 'border-box'
-    }, imgStyle),
+    }, imgStyle, {}, polyfillStyle),
     loading: "lazy",
     onLoad: onLoaded
   }, props))));
@@ -284,6 +316,7 @@ const Image$1 = (_ref) => {
 
 exports.Image = Image$1;
 exports.useContentfulImage = useContentfulImage;
+exports.useIEObjectFitPolyfill = useIEObjectFitPolyfill;
 exports.useImgLazyLoad = useImgLazyLoad;
 exports.useSanityImage = useSanityImage;
 //# sourceMappingURL=index.js.map

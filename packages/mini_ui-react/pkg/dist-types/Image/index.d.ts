@@ -4,7 +4,7 @@ import useImgLazyLoad from './useImgLazyLoad';
 interface Props extends HTMLAttributes<HTMLImageElement> {
     size: ImageSize;
     lowResSrc?: string;
-    srcSets?: SrcSet[];
+    srcSets?: Array<SrcSet>;
     src: string;
     aspectRatio: number;
     style?: CSSProperties;
@@ -18,3 +18,4 @@ export default Image;
 export { useImgLazyLoad, Image };
 export { default as useContentfulImage } from './useContentfulImage';
 export { default as useSanityImage } from './useSanityImage';
+export { default as useIEObjectFitPolyfill } from './useIEObjectFitPolyfill';

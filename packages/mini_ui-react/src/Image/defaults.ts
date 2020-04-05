@@ -1,6 +1,6 @@
 import { Format } from './types';
 
-const formats: Format[] = [
+const formats: Array<Format> = [
   {
     type: 'image/webp',
     name: 'webp',

@@ -4,12 +4,12 @@ interface UseSanityImageProps {
     size: ImageSize;
     blurUp?: boolean;
     quality?: number;
-    formats?: Format[];
+    formats?: Array<Format>;
 }
 declare type UseSanityImage = (config: UseSanityImageProps) => {
     src: string;
     lowResSrc?: string;
-    srcSets: SrcSet[];
+    srcSets: Array<SrcSet>;
     size: ImageSize;
 };
 declare const useSanityImage: UseSanityImage;

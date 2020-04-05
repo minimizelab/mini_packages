@@ -6,12 +6,17 @@ import defaults from './defaults';
 interface UseContentfulImageProps {
   baseUrl: string;
   size: ImageSize;
-  formats?: Format[];
+  formats?: Array<Format>;
 }
 
 type UseContentfulImage = (
   config: UseContentfulImageProps
-) => { src: string; lowResSrc: string; srcSets: SrcSet[]; size: ImageSize };
+) => {
+  src: string;
+  lowResSrc: string;
+  srcSets: Array<SrcSet>;
+  size: ImageSize;
+};
 
 const useContentfulImage: UseContentfulImage = ({
   baseUrl,
@@ -36,7 +41,7 @@ const useContentfulImage: UseContentfulImage = ({
       }),
     [baseUrl]
   );
-  const srcSets = useMemo<SrcSet[]>(
+  const srcSets = useMemo<Array<SrcSet>>(
     () =>
       formats.map(({ type, name }) => ({
         srcSet: `${urlBuilder.getContentfulUrl({

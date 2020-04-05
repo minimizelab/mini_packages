@@ -8,12 +8,17 @@ interface UseSanityImageProps {
   size: ImageSize;
   blurUp?: boolean;
   quality?: number;
-  formats?: Format[];
+  formats?: Array<Format>;
 }
 
 type UseSanityImage = (
   config: UseSanityImageProps
-) => { src: string; lowResSrc?: string; srcSets: SrcSet[]; size: ImageSize };
+) => {
+  src: string;
+  lowResSrc?: string;
+  srcSets: Array<SrcSet>;
+  size: ImageSize;
+};
 
 const useSanityImage: UseSanityImage = ({
   baseUrl,
@@ -51,7 +56,7 @@ const useSanityImage: UseSanityImage = ({
         : undefined,
     [baseUrl]
   );
-  const srcSets = useMemo<SrcSet[]>(
+  const srcSets = useMemo<Array<SrcSet>>(
     () =>
       formats.map(({ type, name }) => ({
         srcSet: `${urlBuilder.getSanityUrl({

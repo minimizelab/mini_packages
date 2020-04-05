@@ -6,7 +6,7 @@ import useIEObjectFitPolyfill from './useIEObjectFitPolyfill';
 interface Props extends HTMLAttributes<HTMLImageElement> {
   size: ImageSize;
   lowResSrc?: string;
-  srcSets?: SrcSet[];
+  srcSets?: Array<SrcSet>;
   src: string;
   aspectRatio: number;
   style?: CSSProperties;
@@ -29,15 +29,15 @@ const Image: FC<Props> = ({
 }) => {
   const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResSrc);
   const { imgRef, polyfillStyle } = useIEObjectFitPolyfill({
-    objectFit: imgStyle.objectFit ? imgStyle.objectFit : 'cover',
-    objectPosition: imgStyle.objectPosition
+    objectFit: imgStyle?.objectFit ? imgStyle.objectFit : 'cover',
+    objectPosition: imgStyle?.objectPosition
       ? imgStyle.objectPosition
       : 'center',
   });
   return (
     <div
       style={{
-        width: size.height * aspectRatio,
+        width: size.height ? size.height * aspectRatio : undefined,
         height: size.height,
         maxHeight: '100%',
         maxWidth: '100%',
