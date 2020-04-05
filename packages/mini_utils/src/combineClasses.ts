@@ -17,7 +17,6 @@ export const combineClasses = (
           }
         });
         break;
-      case 'undefined':
       default:
         break;
     }

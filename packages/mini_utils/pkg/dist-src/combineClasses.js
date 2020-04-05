@@ -14,7 +14,6 @@ export const combineClasses = (classNames) => {
                     }
                 });
                 break;
-            case 'undefined':
             default:
                 break;
         }
