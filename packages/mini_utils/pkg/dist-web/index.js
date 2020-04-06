@@ -1,7 +1,7 @@
 const addClassName = (classNames, newClassName) => classNames.length ? classNames.concat(' ', newClassName) : newClassName;
 const combineClasses = (classNames) => {
     let result = '';
-    classNames.forEach(item => {
+    classNames.forEach((item) => {
         switch (typeof item) {
             case 'string':
                 if (item.length > 0)
@@ -43,8 +43,7 @@ const addFormat = (url, format) => {
     }
     return url;
 };
-
-const getContentfulUrl = ({ baseUrl, size, fit, format, quality, resolution, }) => {
+const getQueryString = ({ size, resolution, quality, fit, format, }) => {
     let queryString = '';
     if (size)
         queryString = addSize(queryString, size, resolution);
@@ -53,19 +52,15 @@ const getContentfulUrl = ({ baseUrl, size, fit, format, quality, resolution, }) 
     if (quality !== undefined)
         queryString = addQuality(queryString, quality);
     queryString = addFormat(queryString, format);
-    return addQueryString(baseUrl, queryString, 'https:');
+    return queryString;
 };
 
-const getSanityUrl = ({ baseUrl, size, fit, format, quality, resolution, }) => {
-    let queryString = '';
-    if (size)
-        queryString = addSize(queryString, size, resolution);
-    if (fit)
-        queryString = addFit(queryString, fit);
-    if (quality !== undefined)
-        queryString = addQuality(queryString, quality);
-    queryString = addFormat(queryString, format);
-    return addQueryString(baseUrl, queryString);
+const getContentfulUrl = ({ baseUrl, ...props }) => {
+    return addQueryString(baseUrl, getQueryString(props), 'https:');
+};
+
+const getSanityUrl = ({ baseUrl, ...props }) => {
+    return addQueryString(baseUrl, getQueryString(props));
 };
 
 var index = {

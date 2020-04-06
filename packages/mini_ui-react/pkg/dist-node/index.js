@@ -142,6 +142,9 @@ const useIEObjectFitPolyfill = ({
   };
 };
 
+const resolutions = [1, 1.5, 2];
+const widths = [0.25, 0.5, 1, 1.5, 2];
+const width = 800;
 const formats = [{
   type: 'image/webp',
   name: 'webp'
@@ -153,7 +156,10 @@ const formats = [{
   name: 'jpg'
 }];
 const defaults = {
-  formats
+  formats,
+  width,
+  widths,
+  resolutions
 };
 
 const useContentfulImage = ({
@@ -204,13 +210,24 @@ const useContentfulImage = ({
   };
 };
 
-const useSanityImage = ({
-  baseUrl,
-  size,
-  blurUp,
-  quality,
-  formats = defaults.formats
-}) => {
+const useSanityImage = (_ref) => {
+  let {
+    baseUrl,
+    size,
+    blurUp,
+    quality,
+    fluid = false,
+    sizes
+  } = _ref,
+      rest = _objectWithoutProperties(_ref, ["baseUrl", "size", "blurUp", "quality", "fluid", "sizes"]);
+
+  const {
+    formats,
+    width,
+    widths,
+    resolutions
+  } = _objectSpread2({}, rest, {}, defaults);
+
   const urlConfig = React.useMemo(() => ({
     baseUrl,
     size,
@@ -232,20 +249,37 @@ const useSanityImage = ({
   const srcSets = React.useMemo(() => formats.map(({
     type,
     name
-  }) => ({
-    srcSet: `${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
-      format: name
-    }))}, 
-    ${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
-      format: name,
-      resolution: 1.5
-    }))} 1.5x, 
-    ${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
-      format: name,
-      resolution: 2
-    }))} 2x`,
-    type
-  })), [formats, baseUrl]);
+  }) => {
+    let srcSet = '';
+    const options = {
+      type,
+      sizes
+    };
+
+    if (fluid) {
+      widths.forEach((w, i) => {
+        srcSet = `${i > 0 ? `${srcSet}, ` : ''}${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
+          format: name,
+          resolution: w
+        }))} ${w * (size.width !== undefined ? size.width : width)}w`;
+
+        if (!options.sizes) {
+          options.sizes = `(max-width: ${size.width !== undefined ? size.width : width}px) 100vw, ${size.width !== undefined ? size.width : width}px`;
+        }
+      });
+    } else {
+      resolutions.forEach((r, i) => {
+        srcSet = `${i > 0 ? `${srcSet},` : ''}${mini_utils.urlBuilder.getSanityUrl(_objectSpread2({}, urlConfig, {
+          format: name,
+          resolution: r
+        }))} ${r}x`;
+      });
+    }
+
+    return _objectSpread2({
+      srcSet
+    }, options);
+  }), [formats, baseUrl]);
   return {
     src,
     srcSets,

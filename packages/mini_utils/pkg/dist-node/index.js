@@ -24,6 +24,42 @@ const combineClasses = classNames => {
   return result;
 };
 
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
 const addSize = (url, size, resolution = 1) => {
   let sizeString = '';
   if (size.width !== undefined) sizeString += `&w=${size.width * resolution}`;
@@ -42,37 +78,37 @@ const addFormat = (url, format) => {
 
   return url;
 };
-
-const getContentfulUrl = ({
-  baseUrl,
+const getQueryString = ({
   size,
-  fit,
-  format,
+  resolution,
   quality,
-  resolution
+  fit,
+  format
 }) => {
   let queryString = '';
   if (size) queryString = addSize(queryString, size, resolution);
   if (fit) queryString = addFit(queryString, fit);
   if (quality !== undefined) queryString = addQuality(queryString, quality);
   queryString = addFormat(queryString, format);
-  return addQueryString(baseUrl, queryString, 'https:');
+  return queryString;
 };
 
-const getSanityUrl = ({
-  baseUrl,
-  size,
-  fit,
-  format,
-  quality,
-  resolution
-}) => {
-  let queryString = '';
-  if (size) queryString = addSize(queryString, size, resolution);
-  if (fit) queryString = addFit(queryString, fit);
-  if (quality !== undefined) queryString = addQuality(queryString, quality);
-  queryString = addFormat(queryString, format);
-  return addQueryString(baseUrl, queryString);
+const getContentfulUrl = (_ref) => {
+  let {
+    baseUrl
+  } = _ref,
+      props = _objectWithoutProperties(_ref, ["baseUrl"]);
+
+  return addQueryString(baseUrl, getQueryString(props), 'https:');
+};
+
+const getSanityUrl = (_ref) => {
+  let {
+    baseUrl
+  } = _ref,
+      props = _objectWithoutProperties(_ref, ["baseUrl"]);
+
+  return addQueryString(baseUrl, getQueryString(props));
 };
 
 var index = {

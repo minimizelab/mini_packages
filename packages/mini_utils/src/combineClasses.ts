@@ -5,7 +5,7 @@ export const combineClasses = (
   classNames: Array<string | undefined | { [key: string]: boolean | undefined }>
 ): string => {
   let result = '';
-  classNames.forEach(item => {
+  classNames.forEach((item) => {
     switch (typeof item) {
       case 'string':
         if (item.length > 0) result = addClassName(result, item);

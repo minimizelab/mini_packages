@@ -7,8 +7,13 @@ interface UseSanityImageProps {
   baseUrl: string;
   size: ImageSize;
   blurUp?: boolean;
+  fluid?: boolean;
   quality?: number;
   formats?: Array<Format>;
+  sizes?: string;
+  resolutions?: Array<number>;
+  widths?: Array<number>;
+  width?: number;
 }
 
 type UseSanityImage = (
@@ -25,8 +30,11 @@ const useSanityImage: UseSanityImage = ({
   size,
   blurUp,
   quality,
-  formats = defaults.formats,
+  fluid = false,
+  sizes,
+  ...rest
 }) => {
+  const { formats, width, widths, resolutions } = { ...rest, ...defaults };
   const urlConfig = useMemo(
     () => ({
       baseUrl,
@@ -58,23 +66,36 @@ const useSanityImage: UseSanityImage = ({
   );
   const srcSets = useMemo<Array<SrcSet>>(
     () =>
-      formats.map(({ type, name }) => ({
-        srcSet: `${urlBuilder.getSanityUrl({
-          ...urlConfig,
-          format: name,
-        })}, 
-    ${urlBuilder.getSanityUrl({
-      ...urlConfig,
-      format: name,
-      resolution: 1.5,
-    })} 1.5x, 
-    ${urlBuilder.getSanityUrl({
-      ...urlConfig,
-      format: name,
-      resolution: 2,
-    })} 2x`,
-        type,
-      })),
+      formats.map(({ type, name }) => {
+        let srcSet = '';
+        const options = { type, sizes };
+        if (fluid) {
+          widths.forEach((w, i) => {
+            srcSet = `${i > 0 ? `${srcSet}, ` : ''}${urlBuilder.getSanityUrl({
+              ...urlConfig,
+              format: name,
+              resolution: w,
+            })} ${w * (size.width !== undefined ? size.width : width)}w`;
+            if (!options.sizes) {
+              options.sizes = `(max-width: ${
+                size.width !== undefined ? size.width : width
+              }px) 100vw, ${size.width !== undefined ? size.width : width}px`;
+            }
+          });
+        } else {
+          resolutions.forEach((r, i) => {
+            srcSet = `${i > 0 ? `${srcSet},` : ''}${urlBuilder.getSanityUrl({
+              ...urlConfig,
+              format: name,
+              resolution: r,
+            })} ${r}x`;
+          });
+        }
+        return {
+          srcSet,
+          ...options,
+        };
+      }),
     [formats, baseUrl]
   );
   return { src, srcSets, lowResSrc, size };

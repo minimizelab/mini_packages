@@ -1,38 +1,14 @@
-import {
-  addSize,
-  addFit,
-  addQuality,
-  addFormat,
-  addQueryString,
-} from './shared';
-import { ImageSize, Format, ContentfulFit } from './types';
+import { addQueryString, getQueryString } from './shared';
+import { QueryStringProps } from './types';
 
-export interface GetContentfulUrlProps {
+export interface GetContentfulUrlProps extends QueryStringProps {
   baseUrl: string;
-  size?: ImageSize;
-  fit?: ContentfulFit;
-  format: Format;
-  quality?: number;
-  resolution?: number;
 }
 
 export type GetContentfulUrl = (config: GetContentfulUrlProps) => string;
 
-const getContentfulUrl: GetContentfulUrl = ({
-  baseUrl,
-  size,
-  fit,
-  format,
-  quality,
-  resolution,
-}) => {
-  let queryString = '';
-  if (size) queryString = addSize(queryString, size, resolution);
-  if (fit) queryString = addFit(queryString, fit);
-  if (quality !== undefined) queryString = addQuality(queryString, quality);
-  queryString = addFormat(queryString, format);
-
-  return addQueryString(baseUrl, queryString, 'https:');
+const getContentfulUrl: GetContentfulUrl = ({ baseUrl, ...props }) => {
+  return addQueryString(baseUrl, getQueryString(props), 'https:');
 };
 
 export default getContentfulUrl;

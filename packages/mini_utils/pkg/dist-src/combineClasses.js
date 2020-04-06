@@ -1,7 +1,7 @@
 const addClassName = (classNames, newClassName) => classNames.length ? classNames.concat(' ', newClassName) : newClassName;
 export const combineClasses = (classNames) => {
     let result = '';
-    classNames.forEach(item => {
+    classNames.forEach((item) => {
         switch (typeof item) {
             case 'string':
                 if (item.length > 0)

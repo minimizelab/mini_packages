@@ -1,4 +1,4 @@
-import { ImageSize } from './types';
+import { ImageSize, QueryStringProps } from './types';
 
 export const addSize = (
   url: string,
@@ -36,4 +36,19 @@ export const addFormat = (url: string, format: string): string => {
     return `${url}&fm=${format}`;
   }
   return url;
+};
+
+export const getQueryString = ({
+  size,
+  resolution,
+  quality,
+  fit,
+  format,
+}: QueryStringProps): string => {
+  let queryString = '';
+  if (size) queryString = addSize(queryString, size, resolution);
+  if (fit) queryString = addFit(queryString, fit);
+  if (quality !== undefined) queryString = addQuality(queryString, quality);
+  queryString = addFormat(queryString, format);
+  return queryString;
 };

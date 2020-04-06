@@ -22,3 +22,14 @@ export const addFormat = (url, format) => {
     }
     return url;
 };
+export const getQueryString = ({ size, resolution, quality, fit, format, }) => {
+    let queryString = '';
+    if (size)
+        queryString = addSize(queryString, size, resolution);
+    if (fit)
+        queryString = addFit(queryString, fit);
+    if (quality !== undefined)
+        queryString = addQuality(queryString, quality);
+    queryString = addFormat(queryString, format);
+    return queryString;
+};

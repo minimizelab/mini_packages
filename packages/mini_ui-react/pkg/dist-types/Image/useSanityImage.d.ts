@@ -3,8 +3,13 @@ interface UseSanityImageProps {
     baseUrl: string;
     size: ImageSize;
     blurUp?: boolean;
+    fluid?: boolean;
     quality?: number;
     formats?: Array<Format>;
+    sizes?: string;
+    resolutions?: Array<number>;
+    widths?: Array<number>;
+    width?: number;
 }
 declare type UseSanityImage = (config: UseSanityImageProps) => {
     src: string;
