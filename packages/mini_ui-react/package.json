@@ -19,7 +19,7 @@
   "scripts": {
     "build": "pika build && build-storybook -c .storybook -o dist",
     "start": "yarn storybook",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "version": "yarn build",
     "storybook": "start-storybook"
   },

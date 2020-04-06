@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "pika build",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "version": "yarn build"
   },
   "@pika/pack": {
