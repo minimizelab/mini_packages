@@ -127,7 +127,9 @@ const useIEObjectFitPolyfill = ({
     if (typeof testImg.style.objectFit === 'undefined' || typeof testImg.style.objectPosition === 'undefined') {
       Promise.resolve().then(() => require('object-fit-images')).then(({
         default: ObjectFitImages
-      }) => ObjectFitImages(imgRef.current));
+      }) => {
+        ObjectFitImages(imgRef.current);
+      });
     }
   }, [imgRef]);
   return {
@@ -135,7 +137,7 @@ const useIEObjectFitPolyfill = ({
     polyfillStyle: {
       objectFit,
       objectPosition,
-      fontFamily: `"object-fit: ${objectFit}; object-position: ${objectPosition}"`
+      fontFamily: `object-fit: ${objectFit}; object-position: ${objectPosition}`
     }
   };
 };
@@ -274,8 +276,8 @@ const Image$1 = (_ref) => {
     imgRef,
     polyfillStyle
   } = useIEObjectFitPolyfill({
-    objectFit: (imgStyle === null || imgStyle === void 0 ? void 0 : imgStyle.objectFit) ? imgStyle.objectFit : 'cover',
-    objectPosition: (imgStyle === null || imgStyle === void 0 ? void 0 : imgStyle.objectPosition) ? imgStyle.objectPosition : 'center'
+    objectFit: imgStyle && imgStyle.objectFit ? imgStyle.objectFit : 'cover',
+    objectPosition: imgStyle && imgStyle.objectPosition ? imgStyle.objectPosition : 'center'
   });
   return React__default.createElement("div", {
     style: _objectSpread2({
@@ -288,7 +290,7 @@ const Image$1 = (_ref) => {
       transition: 'filter 200ms ease',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      backgroundImage: lowResSrc !== undefined ? `url(${lowResSrc})` : undefined
+      backgroundImage: typeof lowResSrc !== 'undefined' ? `url(${lowResSrc})` : undefined
     }, style),
     className: className
   }, preloaded && React__default.createElement("picture", {

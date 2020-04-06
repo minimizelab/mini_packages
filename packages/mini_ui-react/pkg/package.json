@@ -41,5 +41,6 @@
   },
   "source": "dist-src/index.js",
   "types": "dist-types/index.d.ts",
+  "module": "dist-web/index.js",
   "main": "dist-node/index.js"
 }

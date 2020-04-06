@@ -5,7 +5,9 @@ const useIEObjectFitPolyfill = ({ objectFit, objectPosition, }) => {
         const testImg = document.createElement('img');
         if (typeof testImg.style.objectFit === 'undefined' ||
             typeof testImg.style.objectPosition === 'undefined') {
-            import('object-fit-images').then(({ default: ObjectFitImages }) => ObjectFitImages(imgRef.current));
+            import('object-fit-images').then(({ default: ObjectFitImages }) => {
+                ObjectFitImages(imgRef.current);
+            });
         }
     }, [imgRef]);
     return {
@@ -13,7 +15,7 @@ const useIEObjectFitPolyfill = ({ objectFit, objectPosition, }) => {
         polyfillStyle: {
             objectFit,
             objectPosition,
-            fontFamily: `"object-fit: ${objectFit}; object-position: ${objectPosition}"`,
+            fontFamily: `object-fit: ${objectFit}; object-position: ${objectPosition}`,
         },
     };
 };

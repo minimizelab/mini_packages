@@ -1,6 +1,6 @@
-import { CSSProperties, Ref } from 'react';
+import { CSSProperties, RefObject } from 'react';
 declare type UseIEObjectFitPolyfill = (style: CSSProperties) => {
-    imgRef: Ref<HTMLImageElement>;
+    imgRef: RefObject<HTMLImageElement>;
     polyfillStyle: CSSProperties;
 };
 declare const useIEObjectFitPolyfill: UseIEObjectFitPolyfill;

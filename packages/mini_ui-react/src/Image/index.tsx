@@ -29,10 +29,9 @@ const Image: FC<Props> = ({
 }) => {
   const { loaded, preloaded, onLoaded } = useImgLazyLoad(lowResSrc);
   const { imgRef, polyfillStyle } = useIEObjectFitPolyfill({
-    objectFit: imgStyle?.objectFit ? imgStyle.objectFit : 'cover',
-    objectPosition: imgStyle?.objectPosition
-      ? imgStyle.objectPosition
-      : 'center',
+    objectFit: imgStyle && imgStyle.objectFit ? imgStyle.objectFit : 'cover',
+    objectPosition:
+      imgStyle && imgStyle.objectPosition ? imgStyle.objectPosition : 'center',
   });
   return (
     <div
@@ -47,7 +46,7 @@ const Image: FC<Props> = ({
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundImage:
-          lowResSrc !== undefined ? `url(${lowResSrc})` : undefined,
+          typeof lowResSrc !== 'undefined' ? `url(${lowResSrc})` : undefined,
         ...style,
       }}
       className={className}
@@ -55,7 +54,7 @@ const Image: FC<Props> = ({
       {preloaded && (
         <picture style={{ lineHeight: 0 }}>
           {srcSets &&
-            srcSets.map(srcSet => <source key={srcSet.type} {...srcSet} />)}
+            srcSets.map((srcSet) => <source key={srcSet.type} {...srcSet} />)}
           <img
             ref={imgRef}
             className={imgClassName}
@@ -81,7 +80,6 @@ const Image: FC<Props> = ({
 };
 
 export default Image;
-export { useImgLazyLoad, Image };
+export { useImgLazyLoad, Image, useIEObjectFitPolyfill };
 export { default as useContentfulImage } from './useContentfulImage';
 export { default as useSanityImage } from './useSanityImage';
-export { default as useIEObjectFitPolyfill } from './useIEObjectFitPolyfill';

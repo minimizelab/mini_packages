@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-const useImgLazyLoad = url => {
+const useImgLazyLoad = (url) => {
     const lazyLoad = typeof url !== 'undefined';
     const [loaded, setLoaded] = useState(!lazyLoad);
     const [preloaded, setPreloaded] = useState(!lazyLoad);

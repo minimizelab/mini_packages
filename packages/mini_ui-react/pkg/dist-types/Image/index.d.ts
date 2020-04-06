@@ -1,6 +1,7 @@
 import { FC, HTMLAttributes, CSSProperties } from 'react';
 import { ImageSize, SrcSet } from './types';
 import useImgLazyLoad from './useImgLazyLoad';
+import useIEObjectFitPolyfill from './useIEObjectFitPolyfill';
 interface Props extends HTMLAttributes<HTMLImageElement> {
     size: ImageSize;
     lowResSrc?: string;
@@ -15,7 +16,6 @@ interface Props extends HTMLAttributes<HTMLImageElement> {
 }
 declare const Image: FC<Props>;
 export default Image;
-export { useImgLazyLoad, Image };
+export { useImgLazyLoad, Image, useIEObjectFitPolyfill };
 export { default as useContentfulImage } from './useContentfulImage';
 export { default as useSanityImage } from './useSanityImage';
-export { default as useIEObjectFitPolyfill } from './useIEObjectFitPolyfill';
